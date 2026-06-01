@@ -9,6 +9,10 @@
 Variablur is a Swift package for applying SwiftUI blur effects whose strength
 changes across a view.
 
+<div align="center">
+  <img width="256" src="/Resources/Example.gif" alt="Preview">
+</div>
+
 Use it to add edge fades, paired horizontal or vertical blurs, perimeter blur,
 and custom directional blur overlays without building mask images by hand.
 
