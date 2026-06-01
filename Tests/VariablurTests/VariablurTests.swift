@@ -30,7 +30,11 @@ import SwiftUI
 }
 
 @Test func bottomVariationDefaultsToOppositeOfCustomFromPoint() async throws {
-    let configurations = Variation.bottom(.easeInOut, from: .bottomTrailing).configurations(radius: 24)
+    let configurations = Variation.bottom(
+        .easeInOut,
+        height: 128,
+        from: .bottomTrailing
+    ).configurations(radius: 24)
 
     guard case let .directional(curve, startPoint, endPoint, _) = configurations.first?.mode else {
         #expect(Bool(false), "Expected directional configuration")
@@ -45,9 +49,9 @@ import SwiftUI
 @Test func topVariationSupportsFullyCustomDirection() async throws {
     let configurations = Variation.top(
         .easeIn,
+        height: 72,
         from: .bottomTrailing,
-        to: .top,
-        height: 72
+        to: .top
     ).configurations(radius: 18)
 
     guard case let .directional(curve, startPoint, endPoint, height) = configurations.first?.mode else {
@@ -133,8 +137,8 @@ import SwiftUI
 @Test func horizontalVariationSupportsCustomFromPoint() async throws {
     let configurations = Variation.horizontal(
         .easeOut,
-        from: .leading,
-        height: 64
+        height: 64,
+        from: .leading
     ).configurations(radius: 10)
 
     #expect(configurations.count == 1)
