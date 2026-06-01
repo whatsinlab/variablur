@@ -30,13 +30,12 @@ public enum Variation: Equatable, Sendable {
     ///   - from: The point where blur is strongest. The default is `.top`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case top(
         _ curve: Curve = .easeInOut,
         from: UnitPoint = .top,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 
     /// Creates directional blur that starts at the bottom edge.
@@ -46,13 +45,12 @@ public enum Variation: Equatable, Sendable {
     ///   - from: The point where blur is strongest. The default is `.bottom`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case bottom(
         _ curve: Curve = .easeInOut,
         from: UnitPoint = .bottom,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 
     /// Creates directional blur that starts at the leading edge.
@@ -62,13 +60,12 @@ public enum Variation: Equatable, Sendable {
     ///   - from: The point where blur is strongest. The default is `.leading`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case leading(
         _ curve: Curve = .easeInOut,
         from: UnitPoint = .leading,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 
     /// Creates directional blur that starts at the trailing edge.
@@ -78,13 +75,12 @@ public enum Variation: Equatable, Sendable {
     ///   - from: The point where blur is strongest. The default is `.trailing`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case trailing(
         _ curve: Curve = .easeInOut,
         from: UnitPoint = .trailing,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 
     /// Creates leading and trailing directional blur.
@@ -99,13 +95,12 @@ public enum Variation: Equatable, Sendable {
     ///     horizontal edges.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case horizontal(
         _ curve: Curve = .easeInOut,
         from: UnitPoint? = nil,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 
     /// Creates top and bottom directional blur.
@@ -119,13 +114,12 @@ public enum Variation: Equatable, Sendable {
     ///     vertical edges.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points. Use `.infinity` to span the
-    ///     full distance from `from` to `to`.
+    ///   - height: The fade distance, in points.
     case vertical(
         _ curve: Curve = .easeInOut,
         from: UnitPoint? = nil,
         to: UnitPoint? = nil,
-        height: CGFloat = .infinity
+        height: CGFloat
     )
 }
 
