@@ -27,60 +27,60 @@ public enum Variation: Equatable, Sendable {
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. The default is `.top`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case top(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint = .top,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 
     /// Creates directional blur that starts at the bottom edge.
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. The default is `.bottom`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case bottom(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint = .bottom,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 
     /// Creates directional blur that starts at the leading edge.
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. The default is `.leading`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case leading(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint = .leading,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 
     /// Creates directional blur that starts at the trailing edge.
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. The default is `.trailing`.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case trailing(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint = .trailing,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 
     /// Creates leading and trailing directional blur.
@@ -91,16 +91,16 @@ public enum Variation: Equatable, Sendable {
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. Use `nil` to render both
     ///     horizontal edges.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case horizontal(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint? = nil,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 
     /// Creates top and bottom directional blur.
@@ -110,16 +110,16 @@ public enum Variation: Equatable, Sendable {
     ///
     /// - Parameters:
     ///   - curve: The curve that maps distance from the start point to blur strength.
+    ///   - height: The fade distance, in points.
     ///   - from: The point where blur is strongest. Use `nil` to render both
     ///     vertical edges.
     ///   - to: The point where blur fades toward zero. When `nil`, Variablur
     ///     uses the opposite of `from`.
-    ///   - height: The fade distance, in points.
     case vertical(
         _ curve: Curve = .easeInOut,
+        height: CGFloat,
         from: UnitPoint? = nil,
-        to: UnitPoint? = nil,
-        height: CGFloat
+        to: UnitPoint? = nil
     )
 }
 
@@ -144,18 +144,18 @@ extension Variation {
         switch self {
         case .all:
             return self
-        case let .top(curve, _, to, height):
-            return .top(curve, from: point, to: to, height: height)
-        case let .bottom(curve, _, to, height):
-            return .bottom(curve, from: point, to: to, height: height)
-        case let .leading(curve, _, to, height):
-            return .leading(curve, from: point, to: to, height: height)
-        case let .trailing(curve, _, to, height):
-            return .trailing(curve, from: point, to: to, height: height)
-        case let .horizontal(curve, _, to, height):
-            return .horizontal(curve, from: point, to: to, height: height)
-        case let .vertical(curve, _, to, height):
-            return .vertical(curve, from: point, to: to, height: height)
+        case let .top(curve, height, _, endPoint):
+            return .top(curve, height: height, from: point, to: endPoint)
+        case let .bottom(curve, height, _, endPoint):
+            return .bottom(curve, height: height, from: point, to: endPoint)
+        case let .leading(curve, height, _, endPoint):
+            return .leading(curve, height: height, from: point, to: endPoint)
+        case let .trailing(curve, height, _, endPoint):
+            return .trailing(curve, height: height, from: point, to: endPoint)
+        case let .horizontal(curve, height, _, endPoint):
+            return .horizontal(curve, height: height, from: point, to: endPoint)
+        case let .vertical(curve, height, _, endPoint):
+            return .vertical(curve, height: height, from: point, to: endPoint)
         }
     }
 
@@ -173,18 +173,18 @@ extension Variation {
         switch self {
         case .all:
             return self
-        case let .top(curve, from, _, height):
-            return .top(curve, from: from, to: point, height: height)
-        case let .bottom(curve, from, _, height):
-            return .bottom(curve, from: from, to: point, height: height)
-        case let .leading(curve, from, _, height):
-            return .leading(curve, from: from, to: point, height: height)
-        case let .trailing(curve, from, _, height):
-            return .trailing(curve, from: from, to: point, height: height)
-        case let .horizontal(curve, from, _, height):
-            return .horizontal(curve, from: from, to: point, height: height)
-        case let .vertical(curve, from, _, height):
-            return .vertical(curve, from: from, to: point, height: height)
+        case let .top(curve, height, startPoint, _):
+            return .top(curve, height: height, from: startPoint, to: point)
+        case let .bottom(curve, height, startPoint, _):
+            return .bottom(curve, height: height, from: startPoint, to: point)
+        case let .leading(curve, height, startPoint, _):
+            return .leading(curve, height: height, from: startPoint, to: point)
+        case let .trailing(curve, height, startPoint, _):
+            return .trailing(curve, height: height, from: startPoint, to: point)
+        case let .horizontal(curve, height, startPoint, _):
+            return .horizontal(curve, height: height, from: startPoint, to: point)
+        case let .vertical(curve, height, startPoint, _):
+            return .vertical(curve, height: height, from: startPoint, to: point)
         }
     }
 
@@ -193,28 +193,28 @@ extension Variation {
         case let .all(curve):
             return [.all(radius: radius, curve: curve)]
 
-        case let .top(curve, from, to, height),
-             let .bottom(curve, from, to, height),
-             let .leading(curve, from, to, height),
-             let .trailing(curve, from, to, height):
+        case let .top(curve, height, startPoint, endPoint),
+             let .bottom(curve, height, startPoint, endPoint),
+             let .leading(curve, height, startPoint, endPoint),
+             let .trailing(curve, height, startPoint, endPoint):
             return [
                 .directional(
                     radius: radius,
                     curve: curve,
-                    from: from,
-                    to: to ?? from.variablurOpposite,
+                    from: startPoint,
+                    to: endPoint ?? startPoint.variablurOpposite,
                     height: height
                 ),
             ]
 
-        case let .horizontal(curve, from, to, height):
-            if let from {
+        case let .horizontal(curve, height, startPoint, endPoint):
+            if let startPoint {
                 return [
                     .directional(
                         radius: radius,
                         curve: curve,
-                        from: from,
-                        to: to ?? from.variablurOpposite,
+                        from: startPoint,
+                        to: endPoint ?? startPoint.variablurOpposite,
                         height: height
                     ),
                 ]
@@ -224,14 +224,14 @@ extension Variation {
                 .directional(radius: radius, curve: curve, from: .trailing, to: .leading, height: height),
             ]
 
-        case let .vertical(curve, from, to, height):
-            if let from {
+        case let .vertical(curve, height, startPoint, endPoint):
+            if let startPoint {
                 return [
                     .directional(
                         radius: radius,
                         curve: curve,
-                        from: from,
-                        to: to ?? from.variablurOpposite,
+                        from: startPoint,
+                        to: endPoint ?? startPoint.variablurOpposite,
                         height: height
                     ),
                 ]
